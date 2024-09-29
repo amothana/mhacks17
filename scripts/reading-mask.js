@@ -1,10 +1,7 @@
-console.log('Reading Mask Script loaded.');
-
 if (!window.readingMaskInitialized) {
-    window.readingMaskInitialized = true; // Prevent multiple initializations
+    window.readingMaskInitialized = true; 
     let maskElement;
 
-    // Function to toggle the reading mask
     window.toggleReadingMask = function() {
         if (!maskElement) {
             maskElement = document.createElement('div');

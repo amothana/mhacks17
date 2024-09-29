@@ -1,5 +1,3 @@
-console.log('Pop Up Script is Loaded');
-// Adjust contrast on the webpage
 document.getElementById('contrast-slider').addEventListener('input', (event) => {
     const contrastValue = event.target.value;
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -11,7 +9,6 @@ document.getElementById('contrast-slider').addEventListener('input', (event) => 
     });
 });
 
-// Toggle the reading mask on the webpage
 document.getElementById('toggle-reading-mask').addEventListener('click', () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.scripting.executeScript({
@@ -24,7 +21,7 @@ document.getElementById('toggle-reading-mask').addEventListener('click', () => {
                     if (window.toggleReadingMask) {
                         window.toggleReadingMask();
                     } else {
-                        console.error('toggleReadingMask function not found.');
+                        console.error('toggle-reading-mask function not found.');
                     }
                 }
             });
@@ -33,21 +30,15 @@ document.getElementById('toggle-reading-mask').addEventListener('click', () => {
 });
 
 document.getElementById('summarize-btn').addEventListener('click', () => {
-    console.log('Summarize button clicked'); // Debugging statement
-
     const loadingIndicator = document.getElementById('loading');
     const summaryTextarea = document.getElementById('summary');
     loadingIndicator.style.display = 'block';
-    summaryTextarea.value = ''; // Clear previous summary
+    summaryTextarea.value = '';
 
-    // Get the current tab's URL
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         const url = tabs[0].url;
-        console.log('Captured URL:', url); // Debugging statement
 
-        // Send URL to the background script for summarization
         chrome.runtime.sendMessage({ action: 'summarizePage', url: url }, (response) => {
-            console.log('Received response:', response); // Debugging statement
             loadingIndicator.style.display = 'none';
 
             if (response && response.summary) {
@@ -59,7 +50,6 @@ document.getElementById('summarize-btn').addEventListener('click', () => {
     });
 });
 
-// Trigger text-to-speech on the webpage
 document.getElementById('text-to-speech').addEventListener('click', () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.scripting.executeScript({
@@ -77,18 +67,43 @@ document.getElementById('toggle-font-button').addEventListener('click', () => {
         });
     });
 });
-// Function to get the current tab's URL
-function getCurrentTabUrl(callback) {
+
+document.getElementById('generate-quiz').addEventListener('click', generateQuiz);
+
+document.getElementById('font-size-slider').addEventListener('input', (event) => {
+    const fontSize = event.target.value;
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        const currentTab = tabs[0];
-        if (currentTab && currentTab.url) {
-            callback(currentTab.url);
-        } else {
-            callback(null);
-        }
+        chrome.scripting.executeScript({
+            target: { tabId: tabs[0].id },
+            func: changeFontSize,
+            args: [fontSize]
+        });
     });
-}
-// Function to get the current tab's URL
+});
+
+document.getElementById('word-spacing-slider').addEventListener('input', (event) => {
+    const wordSpacing = event.target.value;
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.scripting.executeScript({
+            target: { tabId: tabs[0].id },
+            func: changeWordSpacing,
+            args: [wordSpacing]
+        });
+    });
+});
+
+document.getElementById('line-spacing-slider').addEventListener('input', (event) => {
+    const lineSpacing = event.target.value;
+    
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.scripting.executeScript({
+            target: { tabId: tabs[0].id },
+            function: adjustLineSpacing,
+            args: [lineSpacing]
+        });
+    });
+});
+
 function getCurrentTabUrl(callback) {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         const currentTab = tabs[0];
@@ -100,11 +115,9 @@ function getCurrentTabUrl(callback) {
     });
 }
 
-// Function to generate the quiz using the current tab's URL
 function generateQuiz() {
     const quizOutput = document.getElementById('quiz-output');
 
-    // Get the current tab URL
     getCurrentTabUrl((url) => {
         if (!url) {
             quizOutput.textContent = 'Unable to get the current tab URL.';
@@ -132,26 +145,21 @@ function generateQuiz() {
     });
 }
 
-// Function to display the quiz
 function displayQuiz(quiz) {
     const quizOutput = document.getElementById('quiz-output');
-    quizOutput.innerHTML = ''; // Clear previous content
+    quizOutput.innerHTML = ''; 
 
     quiz.forEach((questionData, idx) => {
-        // Create a container for each question
         const questionContainer = document.createElement('div');
         questionContainer.classList.add('question-container');
 
-        // Create and display the question
-        const questionText = document.createElement('h3'); // Using h3 for the question text
+        const questionText = document.createElement('h3'); 
         questionText.textContent = `Q${idx + 1}: ${questionData.question}`;
         questionContainer.appendChild(questionText);
 
-        // Create a container for options
         const optionsContainer = document.createElement('div');
         optionsContainer.classList.add('options-container');
 
-        // Create and display the options
         questionData.options.forEach((option, i) => {
             const optionLabel = document.createElement('label');
             optionLabel.classList.add('option-label');
@@ -166,7 +174,7 @@ function displayQuiz(quiz) {
             optionLabel.appendChild(document.createTextNode(option));
 
             optionsContainer.appendChild(optionLabel);
-            optionsContainer.appendChild(document.createElement('br')); // Add line break for better layout
+            optionsContainer.appendChild(document.createElement('br'));
         });
 
         questionContainer.appendChild(optionsContainer);
@@ -181,8 +189,6 @@ function displayQuiz(quiz) {
     quizOutput.appendChild(submitButton);
 }
 
-
-// Function to check quiz answers
 function checkQuizAnswers(quiz) {
     let score = 0;
     quiz.forEach((questionData, idx) => {
@@ -195,10 +201,6 @@ function checkQuizAnswers(quiz) {
     alert(`You scored ${score} out of ${quiz.length}`);
 }
 
-// Set up event listener for the 'Generate Quiz' button
-document.getElementById('generate-quiz').addEventListener('click', generateQuiz);
-
-// Function to be injected
 function toggleFont() {
     const bodyElement = document.body;
     const isComicSans = bodyElement.classList.contains('comic-sans-font');
@@ -224,55 +226,14 @@ function toggleFont() {
     }
 }
 
-// Adjust font size on the webpage
-document.getElementById('font-size-slider').addEventListener('input', (event) => {
-    const fontSize = event.target.value;
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        chrome.scripting.executeScript({
-            target: { tabId: tabs[0].id },
-            func: changeFontSize,
-            args: [fontSize]
-        });
-    });
-});
-
-// Adjust word spacing on the webpage
-document.getElementById('word-spacing-slider').addEventListener('input', (event) => {
-    const wordSpacing = event.target.value;
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        chrome.scripting.executeScript({
-            target: { tabId: tabs[0].id },
-            func: changeWordSpacing,
-            args: [wordSpacing]
-        });
-    });
-});
-
-document.getElementById('line-spacing-slider').addEventListener('input', (event) => {
-    const lineSpacing = event.target.value;
-    
-    // Inject the line spacing adjustment script into the active tab
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        chrome.scripting.executeScript({
-            target: { tabId: tabs[0].id },
-            function: adjustLineSpacing,
-            args: [lineSpacing]
-        });
-    });
-});
-
-// The function to adjust line spacing on the webpage
 function adjustLineSpacing(spacing) {
     document.body.style.lineHeight = spacing;
 }
 
-
-// Function to adjust contrast
 function adjustContrast(value) {
     document.body.style.filter = `contrast(${value})`;
 }
 
-// Function to change font size
 function changeFontSize(fontSize) {
     const elements = document.querySelectorAll('p, div, span, a, li, h1, h2, h3, h4, h5, h6');
     elements.forEach(el => {
@@ -280,7 +241,6 @@ function changeFontSize(fontSize) {
     });
 }
 
-// Function to change word spacing
 function changeWordSpacing(wordSpacing) {
     document.body.style.wordSpacing = `${wordSpacing}em`;
 }

@@ -4,7 +4,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.url) {
         console.log('Received URL in background.js:', message.url);
 
-        // Perform the asynchronous fetch
         fetch('http://127.0.0.1:5000/summarize', {
             method: 'POST',
             headers: {
@@ -31,7 +30,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             sendResponse({ summary: 'Error summarizing text' });
         });
 
-        return true; // Keeps the message channel open for asynchronous sendResponse
+        return true; 
     } else {
         console.error('No URL provided in the message.');
         sendResponse({ summary: 'Error: No URL provided' });
