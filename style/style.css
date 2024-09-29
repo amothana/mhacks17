@@ -1,0 +1,115 @@
+.custom-font {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+/* Original font style */
+.original-font {
+    font-family: Arial, sans-serif;
+}
+
+/* Main title styling */
+.main-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Section container styling */
+.container {
+    background-color: #ffffff;
+    border: 2px solid #007BFF;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+/* Section header styling */
+.section-header {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #e9f1ff;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Button styling */
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #d9d9d9;
+}
+
+/* Slider container styling */
+.slider-container {
+    margin: 15px 0;
+}
+
+/* Slider styling */
+input[type="range"] {
+    width: 100%;
+}
+
+/* Label styling */
+label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#summary {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none; /* Prevents user from resizing */
+    overflow: auto; /* Allows the content to be scrollable */
+    word-wrap: break-word; /* Ensures long words break to the next line */
+    box-sizing: border-box; /* Includes padding in the element's total width/height */
+}
+
+#summarize-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#summarize-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+#loading {
+    display: none;
+    text-align: center;
+    margin-top: 10px;
+}
