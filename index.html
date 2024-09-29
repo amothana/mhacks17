@@ -11,63 +11,48 @@
 
     <div class="container">
         <h2 class="section-header">Font/Text</h2>
-
         <button id="toggle-font-button">Toggle Dyslexia-Friendly Font</button>
-
         <div class="slider-container">
-            <label for="font-size-slider">Font Size:</label>
+            <label for="font-size-slider">Font Size</label>
             <input type="range" id="font-size-slider" min="10" max="100" value="16">
         </div>
         <div class="slider-container">
-            <label for="line-spacing-slider">Line Spacing:</label>
+            <label for="line-spacing-slider">Line Spacing</label>
             <input type="range" id="line-spacing-slider" min="1" max="3" step="0.1" value="1.5">
         </div>
         <div class="slider-container">
-            <label for="word-spacing-slider">Word Spacing:</label>
-            <input type="range" id="word-spacing-slider" min="0" max="2" step="0.1" value="0">
+            <label for="word-spacing-slider">Word Spacing</label>
+            <input type="range" id="word-spacing-slider" min="0" max="10" step="0.1" value="0">
         </div>
         <div class="slider-container">
-            <label for="contrast-slider">Contrast:</label>
+            <label for="contrast-slider">Contrast</label>
             <input type="range" id="contrast-slider" min="0" max="3" step="0.1" value="1">
         </div>
     </div>
 
     <div class="container">
         <h2 class="section-header">Reading Guides</h2>
-        <button id="highlighting">Highlighting (Under Consideration)</button>
-        <button id="reading-mask">Reading Mask</button>
+        <button id="toggle-reading-mask">Reading Mask</button>
         <button id="text-to-speech">Text-to-Speech</button>
     </div>
 
     <div class="container">
         <h2 class="section-header">Content</h2>
-
-          <h3>Page Summarizer</h3>
-          <button id="summarize-btn">Summarize Page</button>
-          <div id="loading">Loading...</div>
-          <textarea id="summary" readonly placeholder="The summary will appear here..."></textarea>
-          
-          <button id="define-btn">Get Definition</button>
-          <textarea id="definition" readonly placeholder="The definition will appear here..."></textarea>
-
-        <button id="interactive-media">Supplemental Media (W.I.P)</button>
+        <button id="summarize-btn">Summarize Page</button>
+        <div id="loading" style="display: none;">Loading...</div>
+        <textarea id="summary" readonly placeholder="The summary will appear here..."></textarea>
     </div>
 
     <div class="container">
         <h2 class="section-header">Assessment</h2>
-        <button id="comprehension-check">Comprehension Check</button>
-        <button id="summarization-check">Summarization Check</button>
-        <button id="quiz">Quiz</button>
+        <div id="quiz-container">
+            <button id="generate-quiz">Generate Quiz</button>
+            <div id="quiz-output"></div>
+        </div>
+      </div>
+
     </div>
 
-    <script src="scripts/content.js"></script>
-    <script src="scripts/background.js"></script>
     <script src="scripts/popup.js"></script>
-    <!-- <script src="scripts/dyslexia.js"></script>
-    <script src="scripts/font_size.js"></script> -->
-    <script src="scripts/line-spacing.js"></script>
-    <script src="scripts/word-spacing.js"></script>
-    <script src="scripts/content.js"></script>
-    <script src="scripts/reading-mask.js"></script>
 </body>
 </html>

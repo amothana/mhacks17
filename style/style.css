@@ -1,12 +1,77 @@
-.custom-font {
-    font-family: "Comic Sans MS", cursive, sans-serif;
+/* Dyslexia-friendly styles using Comic Sans */
+.dyslexia-mode {
+    font-family: 'Comic Sans MS', Arial, sans-serif !important;
 }
+
 
 /* General styling */
 body {
     font-family: Arial, sans-serif;
+    text-align: center;
     padding: 15px;
     background-color: #f9f9f9;
+}
+
+/* General styling for the quiz container */
+#quiz-output {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 90%; /* Adjust max-width to use available space */
+    margin: 0 auto; /* Center the quiz in the container */
+}
+
+/* Style for each question container */
+.question-container {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 100%; /* Ensure it uses the full width of the parent container */
+}
+
+/* Styling for the question text */
+.question-container h3 {
+    margin-bottom: 10px;
+    font-size: 16px; /* Adjust font size for better readability */
+    font-weight: normal; /* Use normal weight for less cluttered appearance */
+}
+
+/* Styling for the options container */
+.options-container {
+    margin-left: 10px;
+}
+
+/* Styling for the options */
+.option-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px; /* Adjust font size */
+    line-height: 1.2; /* Adjust line height for options */
+}
+
+/* Style the radio buttons */
+.option-input {
+    margin-right: 10px; /* Add space between the radio button and the text */
+}
+
+/* Style the submit button */
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
 }
 
 /* Original font style */

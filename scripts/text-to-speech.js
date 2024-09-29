@@ -1,3 +1,5 @@
+console.log('Text to Speech loaded.');
+
 // Check if there's a selection; if not, use the entire body text
 function readTextAloud() {
     let text = window.getSelection().toString();

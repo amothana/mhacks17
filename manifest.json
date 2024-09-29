@@ -3,7 +3,10 @@
   "name": "Accessibility Extension",
   "version": "1.0",
   "description": "Add multiple QOL and accessibility improvement functionalities to all websites",
-  "permissions": ["activeTab", "scripting", "storage"],
+  "permissions": ["activeTab", "scripting", "storage", "tabs"],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "background": {
     "service_worker": "scripts/background.js"
   },
@@ -18,7 +21,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["scripts/content.js", "scripts/reading-mask.js"]
+      "js": ["scripts/content.js"]
     }
   ]
 }
